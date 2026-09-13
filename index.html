@@ -1,177 +1,23 @@
-<!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#02070d">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="JARVIS">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-180.png">
-<title>JARVIS</title>
-<style>
-:root{
- --bg:#02070d;--bg2:#061522;--cyan:#48e1ff;--cyan2:#a4f4ff;--line:rgba(72,225,255,.34);
- --panel:rgba(5,19,31,.78);--muted:#8fcfda;--ok:#5fffd1;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;background:#02070d;color:#dffbff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}
-body{background:radial-gradient(circle at 50% 42%,#0b344d 0%,#061521 28%,#02070d 68%)}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
- linear-gradient(rgba(72,225,255,.025) 1px,transparent 1px),
- linear-gradient(90deg,rgba(72,225,255,.025) 1px,transparent 1px);
- background-size:26px 26px;mask-image:radial-gradient(circle,black 30%,transparent 90%)}
-.scan:after{content:"";position:fixed;left:0;right:0;height:90px;top:-100px;pointer-events:none;
- background:linear-gradient(180deg,transparent,rgba(72,225,255,.06),transparent);animation:scan 6s linear infinite}
-.app{height:100dvh;display:grid;grid-template-columns:23% 54% 23%;grid-template-rows:13% 68% 19%;
- gap:10px;padding:calc(env(safe-area-inset-top) + 9px) calc(env(safe-area-inset-right) + 10px) calc(env(safe-area-inset-bottom) + 10px) calc(env(safe-area-inset-left) + 10px)}
-.panel{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,rgba(8,29,45,.83),rgba(3,12,19,.82));
- box-shadow:inset 0 0 28px rgba(72,225,255,.045),0 0 18px rgba(0,0,0,.32);
- clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
-.header{grid-column:1/4;display:flex;align-items:center;justify-content:center}
-.logo{font-weight:800;letter-spacing:.48em;font-size:clamp(30px,5.4vw,60px);color:#b4f7ff;text-shadow:0 0 18px rgba(72,225,255,.75)}
-.sub{position:absolute;bottom:9px;font-size:11px;letter-spacing:.34em;color:#55ddff}
-.side{padding:15px}
-.kicker{font-size:10px;letter-spacing:.22em;color:#69e5ff;margin-bottom:10px}
-.time{font-size:clamp(38px,6vw,72px);font-weight:250;line-height:.95}
-.date{font-size:13px;color:#a4eefa;margin-top:8px;text-transform:capitalize}
-.metric{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(72,225,255,.14);padding:8px 0;font-size:12px}
-.metric b{color:#5ee5ff;font-weight:600;text-align:right}
-.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.smallbtn,.mainbtn{border:1px solid #4ce1ff;background:rgba(4,20,31,.86);color:#dffcff;text-decoration:none;text-align:center;letter-spacing:.09em;
- box-shadow:inset 0 0 14px rgba(72,225,255,.05),0 0 12px rgba(72,225,255,.08)}
-.smallbtn{padding:10px 6px;font-size:11px}
-.smallbtn:active,.mainbtn:active{transform:scale(.98);background:rgba(16,54,72,.9)}
-.center{display:flex;align-items:center;justify-content:center;overflow:hidden}
-.core{position:relative;width:min(58vw,60vh);aspect-ratio:1}
-.ring{position:absolute;border-radius:50%;border:2px solid rgba(72,225,255,.22);box-shadow:0 0 20px rgba(72,225,255,.08)}
-.r1{inset:1%;border-top-color:#c1f8ff;border-right-color:#29c9ff;animation:spin 13s linear infinite}
-.r2{inset:8%;border:6px dashed rgba(72,225,255,.35);animation:spinr 8s linear infinite}
-.r3{inset:17%;border-width:3px;border-left-color:#fff;border-bottom-color:#3ee3ff;animation:spin 5s linear infinite}
-.r4{inset:27%;border:11px double rgba(92,231,255,.36);animation:spinr 17s linear infinite}
-.ticks{position:absolute;inset:4%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(96,233,255,.85) 0deg 1deg,transparent 1deg 7deg);
- -webkit-mask:radial-gradient(circle,transparent 0 82%,#000 83% 86%,transparent 87%);mask:radial-gradient(circle,transparent 0 82%,#000 83% 86%,transparent 87%);animation:spin 25s linear infinite}
-.arc{position:absolute;inset:38%;border-radius:50%;background:radial-gradient(circle,#fff 0 7%,#b6f8ff 10%,#55e7ff 24%,#0a8cc4 43%,rgba(10,140,196,.18) 64%,transparent 73%);
- box-shadow:0 0 28px #6deaff,0 0 78px rgba(72,225,255,.85),inset 0 0 22px white;animation:pulse 1.8s ease-in-out infinite}
-.orbit{position:absolute;inset:5%;border-radius:50%;animation:spin 5.2s linear infinite}
-.orbit:before{content:"";position:absolute;left:50%;top:-4px;width:10px;height:10px;border-radius:50%;background:#e9fdff;box-shadow:0 0 20px #5be8ff}
-.centertext{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none}
-.centertext strong{font-size:clamp(20px,3vw,34px);letter-spacing:.28em}
-.centertext span{font-size:10px;letter-spacing:.45em;color:#5fe5ff;margin-top:8px}
-.mainbtn{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);padding:13px 22px;font-size:13px;min-width:220px}
-.footer{grid-column:1/4;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.tile{padding:12px;display:flex;flex-direction:column;justify-content:center}
-.tile h3{font-size:10px;letter-spacing:.18em;color:#6fe8ff;margin:0 0 8px}
-.tile p{font-size:12px;margin:2px 0;color:#c9f7ff}
-.weatherbig{font-size:28px;font-weight:300}
-#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 16px);transform:translateX(-50%);padding:10px 14px;background:#071722;border:1px solid #42ddff;border-radius:6px;
- color:#dffcff;font-size:12px;opacity:0;pointer-events:none;transition:.3s;z-index:20}
-#toast.show{opacity:1}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes spinr{to{transform:rotate(-360deg)}}@keyframes pulse{0%,100%{transform:scale(.96);filter:brightness(.92)}50%{transform:scale(1.06);filter:brightness(1.28)}}@keyframes scan{to{top:100%}}
-@media (orientation:portrait){
- .app{grid-template-columns:1fr;grid-template-rows:11% 17% 50% 22%}
- .header{grid-column:1}.left{display:none}.right{grid-row:2}.center{grid-row:3}.footer{grid-column:1;grid-row:4}
- .core{width:min(84vw,46vh)}.footer .tile:nth-child(2){display:none}.footer{grid-template-columns:1fr 1fr}
-}
-</style>
-</head>
-<body>
-<div class="scan"></div>
-<div class="app">
-<header class="panel header"><div class="logo">JARVIS</div><div class="sub">ONLINE • PERSONAL SYSTEM</div></header>
-
-<aside class="panel side left">
- <div class="kicker">LOCAL STATUS</div>
- <div id="time" class="time">--:--</div>
- <div id="date" class="date">---</div>
- <div style="margin-top:18px">
-  <div class="metric"><span>AI CORE</span><b>ONLINE</b></div>
-  <div class="metric"><span>CONNECTION</span><b id="net">CHECKING</b></div>
-  <div class="metric"><span>BATTERY</span><b id="battery">N/D</b></div>
-  <div class="metric"><span>VOICE</span><b id="voiceStatus">READY</b></div>
- </div>
- <div class="btnrow">
-  <button class="smallbtn" id="speakBtn">SALUTO</button>
-  <a class="smallbtn" href="https://chatgpt.com/" target="_self">CHATGPT</a>
- </div>
-</aside>
-
-<main class="panel center">
- <div class="core">
-  <div class="ticks"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div>
-  <div class="orbit"></div><div class="arc"></div>
-  <div class="centertext"><strong>JARVIS</strong><span>ONLINE</span></div>
- </div>
- <a class="mainbtn" href="https://chatgpt.com/" target="_self">◉ PARLA CON JARVIS</a>
-</main>
-
-<aside class="panel side right">
- <div class="kicker">ENVIRONMENT</div>
- <div class="weatherbig" id="temp">--°</div>
- <div id="weatherText" style="font-size:12px;color:#aeefff;margin-bottom:10px">Tocca “METEO” per attivarlo</div>
- <div class="metric"><span>LOCALITÀ</span><b id="place">NON ATTIVA</b></div>
- <div class="metric"><span>UMIDITÀ</span><b id="humid">--</b></div>
- <div class="metric"><span>VENTO</span><b id="wind">--</b></div>
- <div class="btnrow">
-  <button class="smallbtn" id="weatherBtn">METEO</button>
-  <button class="smallbtn" id="fullscreenBtn">FULLSCREEN</button>
- </div>
-</aside>
-
-<section class="footer">
- <div class="panel tile"><h3>QUICK CONTROL</h3><p>ChatGPT • Meteo • Voce</p><p>Dashboard locale e privata</p></div>
- <div class="panel tile"><h3>MISSION</h3><p>Assistente personale</p><p>Stato: <span style="color:#5fffd1">OPERATIVO</span></p></div>
- <div class="panel tile"><h3>SYSTEM MESSAGE</h3><p>Ready when you are, Dave.</p><p style="color:#65e7ff">JARVIS v2.0</p></div>
-</section>
-</div>
-<div id="toast"></div>
-<script>
-const toast=(m)=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
-function tick(){const d=new Date();
- document.getElementById('time').textContent=d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
- document.getElementById('date').textContent=d.toLocaleDateString('it-IT',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});}
-tick();setInterval(tick,1000);
-function net(){document.getElementById('net').textContent=navigator.onLine?'ONLINE':'OFFLINE'} net();addEventListener('online',net);addEventListener('offline',net);
-
-if('getBattery' in navigator){navigator.getBattery().then(b=>{
- const upd=()=>document.getElementById('battery').textContent=Math.round(b.level*100)+'%'+(b.charging?' ⚡':'');
- upd();b.addEventListener('levelchange',upd);b.addEventListener('chargingchange',upd);
-}).catch(()=>{})}
-
-function speak(msg){if(!('speechSynthesis' in window)){toast('Voce non disponibile su questo browser');return}
- speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(msg);u.lang='it-IT';u.rate=.92;u.pitch=.86;speechSynthesis.speak(u);}
-document.getElementById('speakBtn').onclick=()=>speak('Bentornato Dave. Tutti i sistemi sono operativi.');
-
-const codeToText=(c)=>({0:'Sereno',1:'Quasi sereno',2:'Parzialmente nuvoloso',3:'Coperto',45:'Nebbia',48:'Nebbia',51:'Pioviggine',53:'Pioviggine',55:'Pioviggine intensa',61:'Pioggia',63:'Pioggia',65:'Pioggia intensa',71:'Neve',73:'Neve',75:'Neve intensa',80:'Rovesci',81:'Rovesci',82:'Rovesci forti',95:'Temporale',96:'Temporale',99:'Temporale forte'})[c]||'Condizioni variabili';
-
-document.getElementById('weatherBtn').onclick=()=>{
- if(!navigator.geolocation){toast('Geolocalizzazione non supportata');return}
- toast('Richiesta posizione…');
- navigator.geolocation.getCurrentPosition(async p=>{
-  try{
-   const {latitude,longitude}=p.coords;
-   const w=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=auto`).then(r=>r.json());
-   const c=w.current;
-   document.getElementById('temp').textContent=Math.round(c.temperature_2m)+'°';
-   document.getElementById('weatherText').textContent=codeToText(c.weather_code);
-   document.getElementById('humid').textContent=c.relative_humidity_2m+'%';
-   document.getElementById('wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
-   document.getElementById('place').textContent='POSIZIONE ATTIVA';
-   localStorage.setItem('jarvis_weather',JSON.stringify({t:Date.now(),lat:latitude,lon:longitude}));
-   speak('Meteo aggiornato, Dave.');
-  }catch(e){toast('Non riesco a caricare il meteo')}
- },()=>toast('Permesso posizione non concesso'),{enableHighAccuracy:false,timeout:10000,maximumAge:600000});
-};
-
-document.getElementById('fullscreenBtn').onclick=async()=>{
- try{if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); else toast('Su iPad usa “Aggiungi alla schermata Home”');}
- catch(e){toast('Su iPad usa “Aggiungi alla schermata Home”')}
-};
-
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
-let greeted=sessionStorage.getItem('greeted');
-if(!greeted){setTimeout(()=>{speak('JARVIS online. Bentornato Dave.');sessionStorage.setItem('greeted','1')},900)}
-</script>
-</body>
-</html>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#01070c"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="JARVIS DBJ"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><title>JARVIS — DBJ INDUSTRY</title><style>
+:root{--c:#39ddff;--l:rgba(57,221,255,.44)}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#01060b;color:#e6fcff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{background:radial-gradient(circle at 50% 40%,rgba(0,112,168,.26),transparent 32%),linear-gradient(#020a11,#01060b)}body:before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(57,221,255,.026) 1px,transparent 1px),linear-gradient(90deg,rgba(57,221,255,.026) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}.app{height:100dvh;padding:8px 10px calc(env(safe-area-inset-bottom) + 8px);display:grid;grid-template-columns:17% 17% 34% 14% 18%;grid-template-rows:11% 27% 28% 16% 18%;gap:8px}.panel{position:relative;border:1px solid var(--l);background:linear-gradient(rgba(6,28,44,.84),rgba(2,10,17,.84));box-shadow:inset 0 0 28px rgba(57,221,255,.045);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);overflow:hidden}.k{font-size:10px;letter-spacing:.16em;color:#65e5ff;margin-bottom:8px}.brand{grid-column:1/3;padding:14px 18px;display:flex;flex-direction:column;justify-content:center}.brand strong{font-size:clamp(20px,2.6vw,36px);font-style:italic;color:#aaf6ff}.brand span{font-size:9px;letter-spacing:.18em;color:#51ddff}.title{grid-column:3;display:flex;align-items:center;justify-content:center;flex-direction:column}.title strong{font-size:clamp(32px,5.1vw,66px);letter-spacing:.22em;text-shadow:0 0 20px rgba(57,221,255,.8)}.title span{font-size:10px;letter-spacing:.36em;color:#56e2ff}.quote{grid-column:4;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;line-height:1.5}.datebox{grid-column:5;display:flex;align-items:center;justify-content:center;flex-direction:column}.datebox .d{font-size:34px}.clock{grid-column:1;grid-row:2;padding:14px}.time{font-size:clamp(42px,5vw,68px);font-weight:250}.full{font-size:12px;color:#a6edf8;text-transform:capitalize}.focus{position:absolute;left:0;right:0;bottom:0;padding:12px;border-top:1px solid rgba(57,221,255,.2);font-size:14px;line-height:1.5}.weather{grid-column:2;grid-row:2;padding:14px}.temp{font-size:40px;font-weight:300}.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(57,221,255,.13);font-size:11px}.btn,.speak{border:1px solid #45ddff;background:rgba(3,18,29,.86);color:#e5fcff;padding:9px 10px;text-decoration:none;text-align:center}.corep{grid-column:3;grid-row:2/4;display:flex;align-items:center;justify-content:center}.core{position:relative;width:min(38vw,56vh);aspect-ratio:1}.ring{position:absolute;border-radius:50%;border:2px solid rgba(57,221,255,.24)}.r1{inset:1%;border-top-color:#fff;border-right-color:#20cfff;animation:s 15s linear infinite}.r2{inset:8%;border:7px dashed rgba(57,221,255,.33);animation:sr 9s linear infinite}.r3{inset:16%;border-left-color:#fff;border-bottom-color:#4ee7ff;animation:s 5.2s linear infinite}.r4{inset:24%;border:11px double rgba(70,226,255,.42);animation:sr 19s linear infinite}.arc{position:absolute;inset:39%;border-radius:50%;background:radial-gradient(circle,#fff 0 8%,#c6fbff 10%,#61eaff 28%,#0f89bd 48%,rgba(10,128,185,.18) 67%,transparent 74%);box-shadow:0 0 30px #65e8ff,0 0 85px rgba(57,221,255,.85);animation:p 1.85s ease-in-out infinite}.ct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}.ct strong{font-size:clamp(20px,2.8vw,36px);letter-spacing:.24em}.ct span{font-size:10px;letter-spacing:.36em;color:#59e0ff}.speak{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);min-width:68%;font-size:14px}.states{position:absolute;left:14px;top:18%;display:grid;gap:18px;font-size:10px}.system{grid-column:4;grid-row:2;padding:14px}.g{display:grid;grid-template-columns:42px 1fr;align-items:center;gap:10px;margin:10px 0}.g i{width:38px;height:38px;border-radius:50%;border:7px solid rgba(57,221,255,.18);border-top-color:#46e1ff}.today{grid-column:5;grid-row:2;padding:14px}.task{padding:7px 0;border-bottom:1px solid rgba(57,221,255,.12);font-size:11px}.world{grid-column:1/3;grid-row:3;padding:10px 12px;background:linear-gradient(rgba(4,24,38,.52),rgba(2,10,17,.72)),url('worldmap.png') center/cover no-repeat}.intel{position:absolute;right:12px;top:28px;display:grid;gap:9px;font-size:10px}.intel span{background:rgba(2,12,20,.72);padding:3px 6px;border-left:2px solid #46e2ff}.appt{grid-column:4;grid-row:3;padding:12px;font-size:10px}.notes{grid-column:5;grid-row:3;padding:14px}.notes textarea{width:100%;height:72%;resize:none;background:transparent;border:0;outline:0;color:#c9f9ff;font:11px/1.65 inherit}.dock{grid-column:1/6;grid-row:4;display:grid;grid-template-columns:repeat(11,1fr);align-items:center;padding:5px 8px;gap:7px}.appicon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#e3fcff;font-size:9px;gap:3px}.appicon img{width:min(54px,5.2vw);height:min(54px,5.2vw);border-radius:14px}.earth{grid-column:1/6;grid-row:5;background:url('earth.png') center 27%/cover no-repeat}.radar{position:absolute;left:16px;bottom:10px;width:110px;height:110px;border:1px solid #49e2ff;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 12px,rgba(57,221,255,.15) 13px 14px),repeating-conic-gradient(rgba(57,221,255,.16) 0 1deg,transparent 1deg 22deg);animation:s 20s linear infinite}.loc{position:absolute;left:135px;bottom:16px;font-size:9px;line-height:1.5}.ctrl{position:absolute;right:12px;bottom:12px;width:155px;padding:10px;background:rgba(1,10,17,.83);border:1px solid #45e0ff;font-size:9px}@keyframes s{to{transform:rotate(360deg)}}@keyframes sr{to{transform:rotate(-360deg)}}@keyframes p{50%{transform:scale(1.08);filter:brightness(1.3)}}@media(orientation:portrait){html,body{overflow:auto}.app{height:auto;grid-template-columns:1fr 1fr;grid-template-rows:auto}.brand,.title,.quote,.datebox,.clock,.weather,.corep,.system,.today,.world,.notes,.appt,.dock,.earth{grid-column:auto;grid-row:auto}.title,.brand,.corep,.dock,.earth{grid-column:1/3}.corep{min-height:520px}.dock{grid-template-columns:repeat(4,1fr)}.earth{min-height:240px}}
+</style></head><body><div class="app">
+<section class="panel brand"><strong>DBJ INDUSTRY</strong><span>TECHNOLOGY • IDEAS • A BETTER TOMORROW</span></section>
+<section class="panel title"><strong>JARVIS</strong><span>YOUR INTELLIGENT ASSISTANT</span></section>
+<section class="panel quote">“DISCIPLINA OGGI.<br>RISULTATI DOMANI.”</section>
+<section class="panel datebox"><div id="dn">---</div><div class="d" id="dd">--</div><div id="mm">---</div><div id="yy">----</div></section>
+<section class="panel clock"><div class="k">ORA LOCALE</div><div class="time" id="time">--:--</div><div class="full" id="fd">---</div><div class="focus"><div class="k">FOCUS</div>“Disciplina oggi.<br>Risultati domani.”</div></section>
+<section class="panel weather"><div class="k">ALBISSOLA MARINA</div><div class="temp" id="temp">--°</div><div id="wd">Tocca METEO</div><div class="row"><span>Umidità</span><b id="hum">--</b></div><div class="row"><span>Vento</span><b id="wind">--</b></div><div class="row"><span>Indice UV</span><b id="uv">--</b></div><button class="btn" id="wb">METEO REALE</button></section>
+<section class="panel corep"><div class="states">● ASCOLTO<br>● ANALIZZO<br>● ELABORO<br>● RISPONDO</div><div class="core"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div><div class="arc"></div><div class="ct"><strong>JARVIS</strong><span>ONLINE</span></div></div><a class="speak" href="https://chatgpt.com/">🎙 PARLA CON JARVIS</a></section>
+<section class="panel system"><div class="k">SISTEMA</div><div class="g"><i></i><div>CPU<br><b>ONLINE</b></div></div><div class="g"><i></i><div>RETE<br><b id="net">CHECK</b></div></div><div class="g"><i></i><div>BATTERIA<br><b id="bat">N/D</b></div></div></section>
+<section class="panel today"><div class="k">OGGI</div><div class="task">○ Progetti</div><div class="task">○ Allenamento</div><div class="task">○ Tempo libero</div><div class="task">○ Lavoro</div></section>
+<section class="panel world"><div class="k">GLOBAL INTELLIGENCE</div><div class="intel"><span>NOTIZIE</span><span>TECNOLOGIA</span><span>FINANZA</span><span>METEO</span><span>SPORT</span><span>MUSICA</span><span>ALTRO</span></div></section>
+<section class="panel appt"><div class="k">PROSSIMI APPUNTAMENTI</div>• Agenda personale<br><br>• Progetti DBJ<br><br>• Allenamento<br><br>• Promemoria</section>
+<section class="panel notes"><div class="k">NOTE RAPIDE</div><textarea id="notes">Meal prep
+Controllo spese
+Idee contenuti
+Piano futuro
+Non mollare</textarea></section>
+<section class="panel dock"><a class="appicon" href="https://chatgpt.com/"><img src="app-chatgpt.png"><span>ChatGPT</span></a><a class="appicon" href="#"><img src="app-note.png"><span>Note</span></a><a class="appicon" href="https://www.icloud.com/iclouddrive/"><img src="app-file.png"><span>File</span></a><a class="appicon" href="https://www.icloud.com/photos/"><img src="app-photo.png"><span>Foto</span></a><a class="appicon" href="#"><img src="app-camera.png"><span>Fotocamera</span></a><a class="appicon" href="https://www.google.com/"><img src="app-safari.png"><span>Safari</span></a><a class="appicon" href="https://www.icloud.com/mail/"><img src="app-mail.png"><span>Mail</span></a><a class="appicon" href="https://www.youtube.com/"><img src="app-youtube.png"><span>YouTube</span></a><a class="appicon" href="https://open.spotify.com/"><img src="app-spotify.png"><span>Spotify</span></a><a class="appicon" href="https://apps.apple.com/"><img src="app-store.png"><span>App Store</span></a><a class="appicon" href="#"><img src="app-settings.png"><span>Impostazioni</span></a></section>
+<section class="panel earth"><div class="radar"></div><div class="loc">ALBISSOLA MARINA<br>ITALIA<br><span id="coords">POSIZIONE NON ATTIVA</span></div><div class="ctrl">☾ Modalità notte<br><br>◌ JARVIS online<br><br>◉ HUD attivo<br><br>⌁ Sistema stabile</div></section>
+</div><script>
+const $=s=>document.querySelector(s);function tick(){const d=new Date(),days=['DOMENICA','LUNEDÌ','MARTEDÌ','MERCOLEDÌ','GIOVEDÌ','VENERDÌ','SABATO'],months=['GENNAIO','FEBBRAIO','MARZO','APRILE','MAGGIO','GIUGNO','LUGLIO','AGOSTO','SETTEMBRE','OTTOBRE','NOVEMBRE','DICEMBRE'];$('#time').textContent=d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});$('#fd').textContent=d.toLocaleDateString('it-IT',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});$('#dn').textContent=days[d.getDay()];$('#dd').textContent=String(d.getDate()).padStart(2,'0');$('#mm').textContent=months[d.getMonth()];$('#yy').textContent=d.getFullYear()}tick();setInterval(tick,1000);function net(){ $('#net').textContent=navigator.onLine?'ONLINE':'OFFLINE'}net();addEventListener('online',net);addEventListener('offline',net);if('getBattery'in navigator){navigator.getBattery().then(b=>{const u=()=>$('#bat').textContent=Math.round(b.level*100)+'%';u();b.addEventListener('levelchange',u)})}const wt=c=>({0:'Sereno',1:'Quasi sereno',2:'Parzialmente nuvoloso',3:'Coperto',45:'Nebbia',61:'Pioggia',63:'Pioggia',65:'Pioggia intensa',80:'Rovesci',95:'Temporale'})[c]||'Variabile';$('#wb').onclick=()=>navigator.geolocation.getCurrentPosition(async p=>{const{latitude,longitude}=p.coords;const u=`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=uv_index_max&timezone=auto&forecast_days=1`;const w=await fetch(u).then(r=>r.json()),c=w.current;$('#temp').textContent=Math.round(c.temperature_2m)+'°';$('#wd').textContent=wt(c.weather_code);$('#hum').textContent=c.relative_humidity_2m+'%';$('#wind').textContent=Math.round(c.wind_speed_10m)+' km/h';$('#uv').textContent=Math.round(w.daily.uv_index_max[0]||0);$('#coords').textContent=latitude.toFixed(4)+'° N · '+longitude.toFixed(4)+'° E'});const n=$('#notes');n.value=localStorage.getItem('dbj_notes')||n.value;n.oninput=()=>localStorage.setItem('dbj_notes',n.value);if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));</script></body></html>

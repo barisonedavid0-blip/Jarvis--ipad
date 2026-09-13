@@ -1,10 +1,10 @@
 {
-  "name": "JARVIS Personal Dashboard",
-  "short_name": "JARVIS",
+  "name": "JARVIS DBJ INDUSTRY",
+  "short_name": "JARVIS DBJ",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#02070d",
-  "theme_color": "#02070d",
+  "background_color": "#01060b",
+  "theme_color": "#01060b",
   "icons": [
     {
       "src": "icon-180.png",
