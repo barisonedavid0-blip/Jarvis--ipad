@@ -1,0 +1,17 @@
+JARVIS DBJ v4
+
+1. Apri GitHub > repository Jarvis--ipad > Code.
+2. Premi + > Upload files.
+3. Carica TUTTI i file estratti da questo pacchetto.
+4. Premi Commit changes.
+5. Aspetta la spunta verde in Deployments.
+6. Apri il sito aggiungendo ?v=40 alla fine dell'indirizzo la prima volta.
+7. Se tutto è corretto, Safari > Condividi > Aggiungi alla schermata Home.
+
+NOVITÀ v4:
+- Font stencil bianco.
+- Sfondo stellato con movimento leggero.
+- Terra inferiore con effetto di rotazione lenta.
+- HUD e reattore centrale animati.
+- Meteo reale, note locali e collegamenti.
+- Vecchia cache disattivata.
