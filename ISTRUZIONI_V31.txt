@@ -1,0 +1,7 @@
+JARVIS DBJ v3.1
+1. GitHub > Jarvis--ipad > Code > + > Upload files.
+2. Carica TUTTI i file di questo pacchetto.
+3. Commit changes.
+4. Attendi la spunta verde del deployment.
+5. Apri il sito con ?v=31 la prima volta.
+6. Dopo la v3.1 non usiamo più il vecchio service worker, così Safari non dovrebbe bloccarsi sulla versione precedente.
