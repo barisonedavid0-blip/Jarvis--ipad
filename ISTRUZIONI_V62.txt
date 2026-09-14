@@ -1,0 +1,10 @@
+JARVIS DBJ V6.2
+- Terra originale fissa mantenuta.
+- Rimossi radar, testi e pannello modalità notte duplicati.
+- Sfondo spazio profondo nuovo: micro-stelle, poche stelle luminose, nebulose leggere.
+- HUD/layout/font invariati.
+- Corretto CSS residuo della V6.1.
+
+CARICAMENTO:
+GitHub > Code > + > Upload files > carica TUTTI i file estratti > Commit changes.
+Attendi deployment verde, poi apri il sito una volta con ?v=62.
