@@ -201,6 +201,20 @@ to{opacity:.92}}
 .quickCard button{margin-top:10px;border:1px solid #3ce2ff;background:#031420;color:white;padding:9px 14px}
 
 </style>
+
+<style>
+.world{background-image:none!important;overflow:hidden}
+.liveintel{display:flex;flex-direction:column;gap:8px;height:calc(100% - 28px);padding-top:7px}
+.news-tabs{display:flex;gap:5px;flex-wrap:wrap}
+.news-tabs button,.radio105{border:1px solid #20d8ff;background:rgba(0,18,30,.82);color:#dffaff;padding:6px 8px;font:600 10px Arial;letter-spacing:.08em}
+.news-tabs button.active{box-shadow:0 0 10px rgba(32,216,255,.65);background:rgba(0,100,130,.32)}
+.newsbox{flex:1;min-height:92px;border-left:2px solid #1bdcff;padding-left:8px;overflow:hidden}
+.newsitem{font:11px/1.25 Arial;color:#e8faff;margin:0 0 7px}
+.newsitem b{color:#35ddff;font-size:9px;margin-right:5px}
+.radio105{display:block;text-align:center;text-decoration:none;margin-top:auto}
+.radio105 strong{font-family:Georgia,serif;font-size:13px}
+.weather .statusline{font:9px Arial;color:#54e4ff;margin-top:5px}
+</style>
 </head>
 <body>
 <div class="space"></div><div class="twinkle"></div>
@@ -225,7 +239,7 @@ to{opacity:.92}}
  <div class="row"><span>Umidità</span><b id="hum">--</b></div>
  <div class="row"><span>Vento</span><b id="wind">--</b></div>
  <div class="row"><span>Indice UV</span><b id="uv">--</b></div>
- <button class="btn" id="wb">METEO REALE</button>
+ <button class="btn" id="wb">AGGIORNA METEO</button><div class="statusline" id="weatherStatus">Albissola Marina • automatico</div>
 </section>
 
 <section class="panel corep">
@@ -257,8 +271,16 @@ to{opacity:.92}}
 </section>
 
 <section class="panel world">
- <div class="k">GLOBAL INTELLIGENCE</div>
- <div class="intel"><span>NOTIZIE</span><span>TECNOLOGIA</span><span>FINANZA</span><span>METEO</span><span>SPORT</span><span>MUSICA</span></div>
+ <div class="k">LIVE INTELLIGENCE</div>
+ <div class="liveintel">
+   <div class="news-tabs">
+     <button class="active" data-feed="general">ULTIME</button>
+     <button data-feed="cronaca">CRONACA</button>
+     <button data-feed="sport">SPORT</button>
+   </div>
+   <div class="newsbox" id="newsbox"><div class="newsitem">JARVIS sta collegando il centro notizie…</div></div>
+   <a class="radio105" href="https://www.105.net/canzone/live-stream/" target="_blank">▶ <strong>RADIO 105</strong> LIVE</a>
+ </div>
 </section>
 
 <section class="panel appt">
@@ -417,6 +439,58 @@ if('serviceWorker' in navigator){
   if('caches' in window){for(const k of await caches.keys()) await caches.delete(k)}
  });
 }
+</script>
+
+<script>
+/* JARVIS V7.1 LIVE INTELLIGENCE */
+const ALBISSOLA={lat:44.327,lon:8.503};
+const weatherCodes={0:"Sereno",1:"Prevalentemente sereno",2:"Parzialmente nuvoloso",3:"Coperto",45:"Nebbia",48:"Nebbia",51:"Pioviggine",53:"Pioviggine",55:"Pioviggine intensa",61:"Pioggia",63:"Pioggia",65:"Pioggia intensa",71:"Neve",80:"Rovesci",81:"Rovesci",82:"Rovesci forti",95:"Temporale"};
+async function loadAlbissolaWeather(){
+ const s=document.getElementById("weatherStatus");
+ try{
+  s.textContent="Connessione meteo…";
+  const u=`https://api.open-meteo.com/v1/forecast?latitude=${ALBISSOLA.lat}&longitude=${ALBISSOLA.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&hourly=uv_index&timezone=Europe%2FRome&forecast_days=1`;
+  const r=await fetch(u,{cache:"no-store"}); if(!r.ok) throw new Error("HTTP "+r.status);
+  const d=await r.json(), c=d.current;
+  document.getElementById("temp").textContent=Math.round(c.temperature_2m)+"°";
+  document.getElementById("wd").textContent=weatherCodes[c.weather_code]||"Condizioni "+c.weather_code;
+  document.getElementById("hum").textContent=c.relative_humidity_2m+"%";
+  document.getElementById("wind").textContent=Math.round(c.wind_speed_10m)+" km/h";
+  const hour=(c.time||"").slice(0,13)+":00";
+  let ix=d.hourly?.time?.indexOf(hour); if(ix<0) ix=new Date().getHours();
+  document.getElementById("uv").textContent=(d.hourly?.uv_index?.[ix] ?? "--");
+  s.textContent="Albissola Marina • dati aggiornati";
+ }catch(e){s.textContent="Meteo non raggiungibile • tocca per riprovare"; console.warn(e);}
+}
+document.getElementById("wb")?.addEventListener("click",loadAlbissolaWeather);
+setTimeout(loadAlbissolaWeather,500);
+setInterval(loadAlbissolaWeather,15*60*1000);
+
+const feeds={
+ general:"https://news.google.com/rss?hl=it&gl=IT&ceid=IT:it",
+ cronaca:"https://news.google.com/rss/search?q=cronaca%20Italia&hl=it&gl=IT&ceid=IT:it",
+ sport:"https://news.google.com/rss/search?q=sport%20Italia&hl=it&gl=IT&ceid=IT:it"
+};
+async function loadNews(kind="general"){
+ const box=document.getElementById("newsbox"); box.innerHTML='<div class="newsitem">Aggiornamento notizie…</div>';
+ try{
+   const endpoint="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(feeds[kind]);
+   const r=await fetch(endpoint,{cache:"no-store"}); const d=await r.json();
+   if(!d.items?.length) throw new Error("feed");
+   box.innerHTML=d.items.slice(0,4).map(x=>{
+      const dt=new Date(x.pubDate); const hm=isNaN(dt)? "LIVE":dt.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});
+      const title=(x.title||"").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      return `<div class="newsitem"><b>${hm}</b>${title}</div>`;
+   }).join("");
+ }catch(e){
+   box.innerHTML='<div class="newsitem">Feed live temporaneamente non disponibile.<br>Tocca di nuovo la categoria.</div>';
+ }
+}
+document.querySelectorAll(".news-tabs button").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".news-tabs button").forEach(x=>x.classList.remove("active")); b.classList.add("active"); loadNews(b.dataset.feed);
+}));
+setTimeout(()=>loadNews("general"),700);
+setInterval(()=>loadNews(document.querySelector(".news-tabs button.active")?.dataset.feed||"general"),10*60*1000);
 </script>
 </body>
 </html>

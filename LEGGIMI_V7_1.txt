@@ -1,0 +1,8 @@
+JARVIS DBJ V7.1 — LIVE INTELLIGENCE
+1. Carica TUTTI i file nella root del repository GitHub, sostituendo index.html e sw.js se richiesto.
+2. Commit changes.
+3. Attendi il deployment GitHub Pages.
+4. In Safari apri il sito con ?v=71, poi ricarica.
+5. Meteo: Albissola Marina automatico via Open-Meteo.
+6. LIVE INTELLIGENCE: Ultime/Cronaca/Sport; Radio 105 apre la pagina ufficiale Live Stream.
+Nota: i feed news dipendono dalla disponibilità del servizio RSS pubblico usato dal browser.
