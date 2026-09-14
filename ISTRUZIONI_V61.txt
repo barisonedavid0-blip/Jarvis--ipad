@@ -1,0 +1,18 @@
+JARVIS DBJ v6.1 — CONSERVATIVA
+
+Questa versione mantiene l'interfaccia e le proporzioni della V5.
+Modifiche principali:
+- sfondo spaziale molto più fitto e visibile;
+- pannelli leggermente più trasparenti;
+- Terra inferiore rifatta senza barra/seam centrale;
+- movimento continuo con crossfade, più simile a una rotazione;
+- un solo radar, nessuna duplicazione;
+- cache vecchie eliminate.
+
+INSTALLAZIONE
+1. Estrai questo ZIP.
+2. GitHub > Jarvis--ipad > Code > + > Upload files.
+3. Carica TUTTI i file estratti.
+4. Commit changes.
+5. Aspetta il deployment verde.
+6. Apri il sito con ?v=61 la prima volta.

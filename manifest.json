@@ -1,7 +1,7 @@
 {
-  "name": "JARVIS DBJ INDUSTRY v5",
+  "name": "JARVIS DBJ INDUSTRY v6.1",
   "short_name": "JARVIS DBJ",
-  "start_url": "./?v=50",
+  "start_url": "./?v=61",
   "display": "standalone",
   "background_color": "#00040a",
   "theme_color": "#00040a",
