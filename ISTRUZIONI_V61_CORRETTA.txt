@@ -1,0 +1,15 @@
+JARVIS DBJ v6.1 CORRETTA
+
+Questa versione mantiene il layout della V5 e modifica SOLO:
+- sfondo spaziale migliorato;
+- Terra statica realistica come foto, senza rotazioni o seam;
+- pannelli leggermente più trasparenti;
+- vecchie cache eliminate.
+
+INSTALLAZIONE
+1. Estrai lo ZIP.
+2. GitHub > Jarvis--ipad > Code > + > Upload files.
+3. Carica TUTTI i file estratti.
+4. Commit changes.
+5. Attendi deployment verde.
+6. Apri una volta il sito con ?v=61.

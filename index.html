@@ -27,49 +27,49 @@ html,body{
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-/* FULL STARRY BACKGROUND — V6.1 */
+/* FULL STARRY BACKGROUND — V6.1 CORRETTA */
 .space{
  position:fixed;inset:0;z-index:0;overflow:hidden;
  background:
- radial-gradient(ellipse at 14% 7%,rgba(120,100,255,.24),transparent 11%),
- radial-gradient(ellipse at 81% 9%,rgba(75,130,255,.23),transparent 12%),
- radial-gradient(ellipse at 55% 34%,rgba(0,105,185,.12),transparent 28%),
- radial-gradient(ellipse at 88% 58%,rgba(90,40,150,.12),transparent 19%),
- linear-gradient(180deg,#000208 0%,#010816 64%,#00040a 100%);
+ radial-gradient(ellipse at 12% 6%,rgba(110,80,255,.30),transparent 11%),
+ radial-gradient(ellipse at 82% 8%,rgba(80,120,255,.28),transparent 12%),
+ radial-gradient(ellipse at 58% 27%,rgba(0,125,210,.13),transparent 27%),
+ radial-gradient(ellipse at 89% 57%,rgba(90,45,160,.11),transparent 19%),
+ linear-gradient(180deg,#000107 0%,#010817 62%,#00040a 100%);
 }
 .space:before,.space:after{
  content:"";position:absolute;inset:-12%;pointer-events:none;
 }
 .space:before{
  background-image:
- radial-gradient(circle,rgba(255,255,255,1) 0 1.25px,transparent 1.9px),
- radial-gradient(circle,rgba(82,227,255,.98) 0 1.05px,transparent 1.65px),
- radial-gradient(circle,rgba(255,255,255,.90) 0 .85px,transparent 1.45px),
- radial-gradient(circle,rgba(120,160,255,.82) 0 1px,transparent 1.55px),
- radial-gradient(circle,rgba(255,255,255,.96) 0 1.5px,transparent 2.25px);
- background-size:33px 33px,53px 53px,79px 79px,121px 121px,203px 203px;
- background-position:4px 8px,19px 31px,43px 13px,77px 57px,109px 91px;
- opacity:.98;
- animation:stars 125s linear infinite;
+ radial-gradient(circle,rgba(255,255,255,1) 0 1.15px,transparent 1.8px),
+ radial-gradient(circle,rgba(90,230,255,.98) 0 1px,transparent 1.6px),
+ radial-gradient(circle,rgba(255,255,255,.86) 0 .8px,transparent 1.35px),
+ radial-gradient(circle,rgba(120,160,255,.78) 0 .95px,transparent 1.5px),
+ radial-gradient(circle,rgba(255,255,255,.98) 0 1.45px,transparent 2.15px);
+ background-size:37px 37px,59px 59px,83px 83px,127px 127px,211px 211px;
+ background-position:2px 7px,21px 35px,47px 13px,83px 61px,111px 91px;
+ opacity:.96;
+ animation:stars 135s linear infinite;
 }
 .space:after{
  background:
- radial-gradient(ellipse at 80% 8%,rgba(185,205,255,.28),transparent 4%),
- radial-gradient(ellipse at 80% 8%,rgba(70,90,255,.21),transparent 9%),
- radial-gradient(ellipse at 14% 7%,rgba(190,190,255,.18),transparent 4%),
- radial-gradient(ellipse at 14% 7%,rgba(70,55,180,.16),transparent 9%),
- radial-gradient(ellipse at 52% 2%,rgba(80,170,255,.12),transparent 7%);
- filter:blur(1.4px);
- animation:nebula 12s ease-in-out infinite alternate;
+ radial-gradient(ellipse at 81% 8%,rgba(210,220,255,.24),transparent 4%),
+ radial-gradient(ellipse at 81% 8%,rgba(70,95,255,.20),transparent 9%),
+ radial-gradient(ellipse at 13% 6%,rgba(195,190,255,.18),transparent 4%),
+ radial-gradient(ellipse at 13% 6%,rgba(75,55,190,.15),transparent 9%),
+ radial-gradient(ellipse at 52% 2%,rgba(80,170,255,.10),transparent 7%);
+ filter:blur(1.5px);
+ animation:nebula 13s ease-in-out infinite alternate;
 }
 .twinkle{
  position:fixed;inset:0;z-index:0;pointer-events:none;
  background-image:
- radial-gradient(circle,rgba(255,255,255,.98) 0 1.55px,transparent 2.35px),
- radial-gradient(circle,rgba(90,230,255,.86) 0 1.15px,transparent 1.9px);
- background-size:157px 157px,239px 239px;
- background-position:37px 67px,97px 23px;
- animation:twinkle 3.4s ease-in-out infinite alternate;
+ radial-gradient(circle,rgba(255,255,255,.97) 0 1.4px,transparent 2.2px),
+ radial-gradient(circle,rgba(90,230,255,.83) 0 1.1px,transparent 1.85px);
+ background-size:173px 173px,251px 251px;
+ background-position:39px 71px,101px 27px;
+ animation:twinkle 3.7s ease-in-out infinite alternate;
 }
 
 /* LAYOUT */
@@ -84,7 +84,7 @@ html,body{
 .panel{
  position:relative;overflow:hidden;
  border:1px solid var(--line);
- background:linear-gradient(180deg,rgba(1,16,29,.50),rgba(0,7,14,.40));
+ background:linear-gradient(180deg,rgba(1,16,29,.52),rgba(0,7,14,.42));
  box-shadow:inset 0 0 30px rgba(57,227,255,.045),0 0 18px rgba(0,0,0,.20);
  backdrop-filter:blur(1.5px);
  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
@@ -180,58 +180,20 @@ html,body{
 .appicon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#eefcff;font-size:8px;gap:3px}
 .appicon img{width:min(49px,4.8vw);height:min(49px,4.8vw);border-radius:13px}
 
-/* REALISTIC MOVING EARTH HORIZON — V6.1 */
+/* EARTH — STATIC REALISTIC PHOTO, V6.1 CORRETTA */
 .earth{
  grid-column:1/6;grid-row:5;
  position:relative;overflow:hidden;
  background:transparent;
 }
-.earthScene{
+.earthPhoto{
  position:absolute;
- left:50%;top:-30%;
- width:118%;height:165%;
- transform:translateX(-50%);
- perspective:900px;
- overflow:hidden;
-}
-.earthGlobe{
- position:absolute;
- left:50%;top:5%;
- width:1080px;height:1080px;
- transform:translateX(-50%) rotateX(66deg);
- transform-style:preserve-3d;
- border-radius:50%;
- overflow:hidden;
- border:2px solid rgba(100,235,255,.95);
- box-shadow:
-   0 -16px 55px rgba(40,170,255,.85),
-   0 -3px 18px rgba(255,255,255,.85),
-   inset 0 0 50px rgba(0,100,170,.45);
- background:#02101d;
-}
-.earthSurfaceA,.earthSurfaceB{
- position:absolute;inset:0;border-radius:50%;
- background-image:url('earth-v61.jpg?v=61');
- background-size:145% 100%;
- background-repeat:no-repeat;
- filter:saturate(1.08) contrast(1.07) brightness(.98);
- will-change:background-position,opacity;
-}
-.earthSurfaceA{
- background-position:20% 50%;
- animation:earthShiftA 34s linear infinite;
-}
-.earthSurfaceB{
- background-position:100% 50%;
- opacity:0;
- animation:earthShiftB 34s linear infinite;
-}
-.earthGlobe:after{
- content:"";position:absolute;inset:0;border-radius:50%;
- background:
-   linear-gradient(90deg,rgba(0,0,0,.06) 15%,transparent 42%,rgba(0,0,0,.55) 86%),
-   radial-gradient(circle at 50% 22%,rgba(255,255,255,.18),transparent 16%);
- pointer-events:none;
+ inset:0;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ object-position:center 40%;
+ filter:saturate(1.06) contrast(1.05) brightness(.98);
 }
 .earthGlow{
  position:absolute;left:0;right:0;top:2px;height:3px;
@@ -240,7 +202,9 @@ html,body{
 }
 .earthShade{
  position:absolute;inset:0;
- background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.03));
+ background:
+ linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.03)),
+ radial-gradient(ellipse at center,transparent 54%,rgba(0,0,0,.20) 100%);
  pointer-events:none;
 }
 .radar{
@@ -252,7 +216,7 @@ html,body{
  animation:spin 18s linear infinite;
 }
 .loc{position:absolute;left:126px;bottom:12px;font-size:8px;line-height:1.5}
-.ctrl{position:absolute;right:11px;bottom:10px;width:145px;padding:9px;border:1px solid #48e0ff;background:rgba(1,10,17,.60);font-size:8px;line-height:1.8}
+.ctrl{position:absolute;right:11px;bottom:10px;width:145px;padding:9px;border:1px solid #48e0ff;background:rgba(1,10,17,.64);font-size:8px;line-height:1.8}
 
 #toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:100;background:#04131e;border:1px solid #45e2ff;padding:9px 13px;border-radius:5px;font-size:10px;opacity:0;transition:.25s}
 #toast.show{opacity:1}
@@ -260,20 +224,11 @@ html,body{
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes spinR{to{transform:rotate(-360deg)}}
 @keyframes pulse{0%,100%{transform:scale(.95);filter:brightness(.95)}50%{transform:scale(1.08);filter:brightness(1.35)}}
-@keyframes earthShiftA{
- 0%{background-position:15% 50%;opacity:1}
- 45%{opacity:1}
- 50%{background-position:85% 50%;opacity:0}
- 100%{background-position:85% 50%;opacity:0}
+
+ 50%{transform:translateX(0%) scale(1.08)}
+ 100%{transform:translateX(5.5%) scale(1.05)}
 }
-@keyframes earthShiftB{
- 0%{background-position:100% 50%;opacity:0}
- 45%{opacity:0}
- 50%{background-position:25% 50%;opacity:1}
- 95%{opacity:1}
- 100%{background-position:100% 50%;opacity:0}
-}
-@keyframes stars{to{background-position:103px 67px,121px 93px,147px 71px,181px 119px,207px 153px}}
+@keyframes stars{to{background-position:113px 73px,131px 101px,157px 81px,191px 129px,217px 163px}}
 @keyframes twinkle{from{opacity:.40}to{opacity:.92}}
 @keyframes nebula{from{opacity:.52}to{opacity:.92}}
 </style>
@@ -366,12 +321,7 @@ Non mollare</textarea>
 </section>
 
 <section class="panel earth">
- <div class="earthScene">
-   <div class="earthGlobe">
-     <div class="earthSurfaceA"></div>
-     <div class="earthSurfaceB"></div>
-   </div>
- </div>
+ <img class="earthPhoto" src="earth-static.jpg?v=61" alt="Terra">
  <div class="earthGlow"></div>
  <div class="earthShade"></div>
  <div class="radar"></div>
