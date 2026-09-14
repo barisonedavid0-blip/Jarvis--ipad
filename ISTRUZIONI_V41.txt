@@ -1,0 +1,12 @@
+JARVIS DBJ v4.1
+- Sfondo stellato più pieno
+- Terra realistica senza barra centrale
+- Movimento lento continuo tipo rotazione
+- Stencil bianco
+
+INSTALLAZIONE:
+1. GitHub > Jarvis--ipad > Code > + > Upload files.
+2. Carica TUTTI i file del pacchetto.
+3. Commit changes.
+4. Aspetta deployment verde.
+5. Apri il sito con ?v=41 la prima volta.
