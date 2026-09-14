@@ -1,0 +1,23 @@
+JARVIS DBJ V7 FUNZIONALE
+
+MANTIENE IL LOOK DELLA V6.2.
+
+FUNZIONI:
+- Meteo reale con posizione, previa autorizzazione.
+- Ora/data reali.
+- Stato rete e batteria, quando Safari espone la batteria.
+- Note modificabili e salvate localmente.
+- Appuntamenti modificabili e salvati localmente.
+- Attività "OGGI" modificabili/spuntabili e salvate.
+- Pulsante PARLA CON JARVIS: saluto vocale e apertura ChatGPT.
+- Dock con collegamenti web.
+- Nessuna cache persistente della vecchia versione.
+
+INSTALLAZIONE:
+1. Estrai ZIP.
+2. GitHub > Jarvis--ipad > Code > + > Upload files.
+3. Carica tutti i file estratti.
+4. Commit changes.
+5. Attendi deployment verde.
+6. Apri una volta con ?v=70.
+7. Se va bene: Safari > Condividi > Aggiungi alla schermata Home.

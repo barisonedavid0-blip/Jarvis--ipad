@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="JARVIS DBJ">
-<link rel="manifest" href="manifest.json?v=62">
-<link rel="apple-touch-icon" href="icon-180.png?v=62">
+<link rel="manifest" href="manifest.json?v=70">
+<link rel="apple-touch-icon" href="icon-180.png?v=70">
 <title>JARVIS — DBJ INDUSTRY</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700&display=swap');
@@ -27,12 +27,12 @@ html,body{
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-/* DEEP SPACE BACKGROUND — V6.2 */
+/* DEEP SPACE BACKGROUND — V7 */
 .space{
  position:fixed;inset:0;z-index:0;overflow:hidden;
  background:
  linear-gradient(rgba(0,3,10,.12),rgba(0,3,10,.20)),
- url('space-v62.jpg?v=62') center/cover no-repeat fixed;
+ url('space-v62.jpg?v=70') center/cover no-repeat fixed;
 }
 .space:before{
  content:"";position:absolute;inset:0;pointer-events:none;
@@ -148,7 +148,7 @@ html,body{
 .g div{font-size:9px}.g b{display:block;font-size:11px;color:#5ee5ff}
 .today{grid-column:5;grid-row:2;padding:13px}
 .task{padding:6px 0;border-bottom:1px solid rgba(57,227,255,.15);font-size:10px}
-.world{grid-column:1/3;grid-row:3;padding:11px 12px;background:linear-gradient(rgba(1,9,18,.22),rgba(1,8,15,.44)),url('worldmap.png?v=62') center/cover no-repeat}
+.world{grid-column:1/3;grid-row:3;padding:11px 12px;background:linear-gradient(rgba(1,9,18,.22),rgba(1,8,15,.44)),url('worldmap.png?v=70') center/cover no-repeat}
 .intel{position:absolute;right:10px;top:30px;display:grid;gap:7px;font-size:9px}
 .intel span{padding:3px 6px;background:rgba(1,10,18,.60);border-left:2px solid #47e0ff}
 .appt{grid-column:4;grid-row:3;padding:12px;font-size:9px;line-height:1.7}
@@ -160,7 +160,7 @@ html,body{
 .appicon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#eefcff;font-size:8px;gap:3px}
 .appicon img{width:min(49px,4.8vw);height:min(49px,4.8vw);border-radius:13px}
 
-/* EARTH — ORIGINAL STATIC IMAGE, CLEAN V6.2 */
+/* EARTH — ORIGINAL STATIC IMAGE, CLEAN V7 */
 .earth{
  grid-column:1/6;grid-row:5;
  position:relative;overflow:hidden;
@@ -188,6 +188,18 @@ html,body{
 }
 @keyframes twinkle{from{opacity:.38}to{opacity:.82}}to{opacity:.92}}
 to{opacity:.92}}
+
+.task{display:flex;align-items:center;gap:6px}
+.task input{accent-color:#38e2ff}
+.task span[contenteditable="true"],#appointments[contenteditable="true"]{outline:none}
+.notes textarea{cursor:text}
+.quickModal{position:fixed;inset:0;z-index:999;background:rgba(0,4,10,.78);display:none;align-items:center;justify-content:center}
+.quickModal.show{display:flex}
+.quickCard{width:min(720px,88vw);border:1px solid #3ce2ff;background:#02101c;padding:18px;box-shadow:0 0 35px rgba(57,227,255,.18)}
+.quickCard h3{margin:0 0 12px}
+.quickCard textarea{width:100%;height:220px;background:#000915;color:#e9fcff;border:1px solid #1e7990;padding:10px;font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.quickCard button{margin-top:10px;border:1px solid #3ce2ff;background:#031420;color:white;padding:9px 14px}
+
 </style>
 </head>
 <body>
@@ -226,7 +238,7 @@ to{opacity:.92}}
   <div class="arc"></div>
   <div class="ct"><strong class="stencil">JARVIS</strong><span>ONLINE</span></div>
  </div>
- <a class="speak stencil" href="https://chatgpt.com/" target="_self">🎙 PARLA CON JARVIS<small>Tocca e parla</small></a>
+ <button class="speak stencil" id="talkBtn">🎙 PARLA CON JARVIS<small>Tocca e parla</small></button>
 </section>
 
 <section class="panel system">
@@ -238,10 +250,10 @@ to{opacity:.92}}
 
 <section class="panel today">
  <div class="k">OGGI</div>
- <div class="task">○ Progetti</div>
- <div class="task">○ Allenamento</div>
- <div class="task">○ Tempo libero</div>
- <div class="task">○ Lavoro</div>
+ <label class="task"><input type="checkbox" data-task="Progetti"> <span contenteditable="true">Progetti</span></label>
+ <label class="task"><input type="checkbox" data-task="Allenamento"> <span contenteditable="true">Allenamento</span></label>
+ <label class="task"><input type="checkbox" data-task="Tempo libero"> <span contenteditable="true">Tempo libero</span></label>
+ <label class="task"><input type="checkbox" data-task="Lavoro"> <span contenteditable="true">Lavoro</span></label>
 </section>
 
 <section class="panel world">
@@ -251,7 +263,7 @@ to{opacity:.92}}
 
 <section class="panel appt">
  <div class="k">PROSSIMI APPUNTAMENTI</div>
- • Agenda personale<br>• Progetti DBJ<br>• Allenamento<br>• Promemoria
+ <div id="appointments" contenteditable="true">• Agenda personale<br>• Progetti DBJ<br>• Allenamento<br>• Promemoria</div>
 </section>
 
 <section class="panel notes">
@@ -264,73 +276,146 @@ Non mollare</textarea>
 </section>
 
 <section class="panel dock">
-<a class="appicon" href="https://chatgpt.com/"><img src="app-chatgpt.png?v=62"><span>ChatGPT</span></a>
-<a class="appicon" href="#"><img src="app-note.png?v=62"><span>Note</span></a>
-<a class="appicon" href="https://www.icloud.com/iclouddrive/"><img src="app-file.png?v=62"><span>File</span></a>
-<a class="appicon" href="https://www.icloud.com/photos/"><img src="app-photo.png?v=62"><span>Foto</span></a>
-<a class="appicon" href="#"><img src="app-camera.png?v=62"><span>Fotocamera</span></a>
-<a class="appicon" href="https://www.google.com/"><img src="app-safari.png?v=62"><span>Safari</span></a>
-<a class="appicon" href="https://www.icloud.com/mail/"><img src="app-mail.png?v=62"><span>Mail</span></a>
-<a class="appicon" href="https://www.youtube.com/"><img src="app-youtube.png?v=62"><span>YouTube</span></a>
-<a class="appicon" href="https://open.spotify.com/"><img src="app-spotify.png?v=62"><span>Spotify</span></a>
-<a class="appicon" href="https://apps.apple.com/"><img src="app-store.png?v=62"><span>App Store</span></a>
-<a class="appicon" href="#"><img src="app-settings.png?v=62"><span>Impostazioni</span></a>
+<a class="appicon" href="https://chatgpt.com/" target="_self"><img src="app-chatgpt.png?v=70"><span>ChatGPT</span></a>
+<a class="appicon" href="#" id="notesShortcut"><img src="app-note.png?v=70"><span>Note</span></a>
+<a class="appicon" href="https://www.icloud.com/iclouddrive/" target="_blank"><img src="app-file.png?v=70"><span>File</span></a>
+<a class="appicon" href="https://www.icloud.com/photos/" target="_blank"><img src="app-photo.png?v=70"><span>Foto</span></a>
+<a class="appicon" href="#" id="cameraShortcut"><img src="app-camera.png?v=70"><span>Fotocamera</span></a>
+<a class="appicon" href="https://www.google.com/" target="_blank"><img src="app-safari.png?v=70"><span>Safari</span></a>
+<a class="appicon" href="https://www.icloud.com/mail/" target="_blank"><img src="app-mail.png?v=70"><span>Mail</span></a>
+<a class="appicon" href="https://www.youtube.com/" target="_blank"><img src="app-youtube.png?v=70"><span>YouTube</span></a>
+<a class="appicon" href="https://open.spotify.com/" target="_blank"><img src="app-spotify.png?v=70"><span>Spotify</span></a>
+<a class="appicon" href="https://apps.apple.com/" target="_blank"><img src="app-store.png?v=70"><span>App Store</span></a>
+<a class="appicon" href="#" id="settingsShortcut"><img src="app-settings.png?v=70"><span>Impostazioni</span></a>
 </section>
 
 <section class="panel earth">
- <img class="earthPhoto" src="earth-static.jpg?v=62" alt="Terra">
+ <img class="earthPhoto" src="earth-static.jpg?v=70" alt="Terra">
  <div class="earthShade"></div>
 </section>
 </div>
 
 <div id="toast"></div>
+<div class="quickModal" id="quickModal">
+ <div class="quickCard">
+  <h3 class="stencil">NOTE RAPIDE</h3>
+  <textarea id="modalNotes"></textarea>
+  <button id="saveModal">SALVA E CHIUDI</button>
+ </div>
+</div>
+
 
 <script>
 const $=s=>document.querySelector(s);
-const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1900)};
+
 function tick(){
  const d=new Date(),days=['DOMENICA','LUNEDÌ','MARTEDÌ','MERCOLEDÌ','GIOVEDÌ','VENERDÌ','SABATO'],months=['GENNAIO','FEBBRAIO','MARZO','APRILE','MAGGIO','GIUGNO','LUGLIO','AGOSTO','SETTEMBRE','OTTOBRE','NOVEMBRE','DICEMBRE'];
  $('#time').textContent=d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
  $('#fd').textContent=d.toLocaleDateString('it-IT',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
- $('#dn').textContent=days[d.getDay()];$('#dd').textContent=String(d.getDate()).padStart(2,'0');$('#mm').textContent=months[d.getMonth()];$('#yy').textContent=d.getFullYear();
+ $('#dn').textContent=days[d.getDay()];
+ $('#dd').textContent=String(d.getDate()).padStart(2,'0');
+ $('#mm').textContent=months[d.getMonth()];
+ $('#yy').textContent=d.getFullYear();
 }
-tick();setInterval(tick,1000);
-function net(){ $('#net').textContent=navigator.onLine?'ONLINE':'OFFLINE'}net();addEventListener('online',net);addEventListener('offline',net);
-if('getBattery'in navigator){
- navigator.getBattery().then(b=>{const u=()=>$('#bat').textContent=Math.round(b.level*100)+'%';u();b.addEventListener('levelchange',u)}).catch(()=>{})
+tick(); setInterval(tick,1000);
+
+function net(){ $('#net').textContent=navigator.onLine?'ONLINE':'OFFLINE' }
+net(); addEventListener('online',net); addEventListener('offline',net);
+
+if('getBattery' in navigator){
+ navigator.getBattery().then(b=>{
+   const u=()=>$('#bat').textContent=Math.round(b.level*100)+'%'+(b.charging?' ⚡':'');
+   u(); b.addEventListener('levelchange',u); b.addEventListener('chargingchange',u);
+ }).catch(()=>{});
 }
+
 const wt=c=>({0:'Sereno',1:'Quasi sereno',2:'Parzialmente nuvoloso',3:'Coperto',45:'Nebbia',48:'Nebbia',51:'Pioviggine',53:'Pioviggine',55:'Pioviggine intensa',61:'Pioggia',63:'Pioggia',65:'Pioggia intensa',71:'Neve',73:'Neve',75:'Neve intensa',80:'Rovesci',81:'Rovesci',82:'Rovesci forti',95:'Temporale',96:'Temporale',99:'Temporale forte'})[c]||'Variabile';
+
 $('#wb').onclick=()=>{
  if(!navigator.geolocation){toast('Posizione non disponibile');return}
+ toast('Aggiornamento meteo…');
  navigator.geolocation.getCurrentPosition(async p=>{
   try{
    const {latitude,longitude}=p.coords;
    const u=`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=uv_index_max&timezone=auto&forecast_days=1`;
-   const w=await fetch(u,{cache:'no-store'}).then(r=>r.json()),c=w.current;
+   const w=await fetch(u,{cache:'no-store'}).then(r=>r.json()), c=w.current;
    $('#temp').textContent=Math.round(c.temperature_2m)+'°';
    $('#wd').textContent=wt(c.weather_code);
    $('#hum').textContent=c.relative_humidity_2m+'%';
    $('#wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
    $('#uv').textContent=Math.round(w.daily?.uv_index_max?.[0]||0);
-   $('#coords').textContent=latitude.toFixed(4)+'° N · '+longitude.toFixed(4)+'° E';
    toast('Meteo aggiornato');
-  }catch(e){toast('Errore meteo')}
- },()=>toast('Permesso posizione non concesso'),{timeout:10000,maximumAge:300000})
+  }catch(e){ toast('Errore meteo') }
+ },()=>toast('Permesso posizione non concesso'),{timeout:10000,maximumAge:300000});
 };
-const n=$('#notes');
-n.value=localStorage.getItem('dbj_notes')||n.value;
-n.oninput=()=>localStorage.setItem('dbj_notes',n.value);
 
-/* remove any old service-worker cache */
-if('serviceWorker'in navigator){
+// Notes, local storage
+const notes=$('#notes');
+notes.value=localStorage.getItem('dbj_notes')||notes.value;
+notes.addEventListener('input',()=>localStorage.setItem('dbj_notes',notes.value));
+
+const modal=$('#quickModal'), modalNotes=$('#modalNotes');
+$('#notesShortcut').onclick=e=>{
+ e.preventDefault();
+ modalNotes.value=notes.value;
+ modal.classList.add('show');
+};
+$('#saveModal').onclick=()=>{
+ notes.value=modalNotes.value;
+ localStorage.setItem('dbj_notes',notes.value);
+ modal.classList.remove('show');
+ toast('Note salvate');
+};
+
+// Editable appointments
+const ap=$('#appointments');
+ap.innerHTML=localStorage.getItem('dbj_appts')||ap.innerHTML;
+ap.addEventListener('input',()=>localStorage.setItem('dbj_appts',ap.innerHTML));
+
+// Editable/checkable Today tasks
+document.querySelectorAll('.task').forEach((row,i)=>{
+ const check=row.querySelector('input'), text=row.querySelector('span');
+ const saved=JSON.parse(localStorage.getItem('dbj_task_'+i)||'null');
+ if(saved){check.checked=!!saved.checked;text.textContent=saved.text||text.textContent}
+ const save=()=>localStorage.setItem('dbj_task_'+i,JSON.stringify({checked:check.checked,text:text.textContent}));
+ check.addEventListener('change',save); text.addEventListener('input',save);
+});
+
+// Jarvis voice + open ChatGPT
+function jarvisSpeak(msg){
+ if(!('speechSynthesis' in window)) return Promise.resolve();
+ return new Promise(resolve=>{
+   speechSynthesis.cancel();
+   const u=new SpeechSynthesisUtterance(msg);
+   u.lang='it-IT'; u.rate=.92; u.pitch=.83;
+   u.onend=resolve; u.onerror=resolve;
+   speechSynthesis.speak(u);
+   setTimeout(resolve,2200);
+ });
+}
+$('#talkBtn').onclick=async()=>{
+ await jarvisSpeak('JARVIS online. Come posso aiutarla, Dave?');
+ location.href='https://chatgpt.com/';
+};
+
+// iPadOS restrictions: show guidance instead of pretending native apps can always be launched
+$('#cameraShortcut').onclick=e=>{e.preventDefault();toast('Apri Fotocamera dalla Home o dal Centro di Controllo')};
+$('#settingsShortcut').onclick=e=>{e.preventDefault();toast('Apri Impostazioni dalla Home di iPadOS')};
+
+// First-session greeting
+if(!sessionStorage.getItem('jarvis_greeted')){
+ setTimeout(()=>jarvisSpeak('JARVIS online. Tutti i sistemi sono operativi.'),900);
+ sessionStorage.setItem('jarvis_greeted','1');
+}
+
+// ensure old service worker cannot pin stale versions
+if('serviceWorker' in navigator){
  addEventListener('load',async()=>{
-  const rs=await navigator.serviceWorker.getRegistrations();
-  for(const r of rs) await r.unregister();
-  if('caches' in window){
-   const keys=await caches.keys();
-   for(const k of keys) await caches.delete(k);
-  }
- })
+  const regs=await navigator.serviceWorker.getRegistrations();
+  for(const r of regs) await r.unregister();
+  if('caches' in window){for(const k of await caches.keys()) await caches.delete(k)}
+ });
 }
 </script>
 </body>
