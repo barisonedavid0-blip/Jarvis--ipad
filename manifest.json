@@ -1,18 +1,18 @@
 {
-  "name": "JARVIS DBJ INDUSTRY v4.1",
+  "name": "JARVIS DBJ INDUSTRY v5",
   "short_name": "JARVIS DBJ",
-  "start_url": "./?v=41",
+  "start_url": "./?v=50",
   "display": "standalone",
-  "background_color": "#01050a",
-  "theme_color": "#01050a",
+  "background_color": "#00040a",
+  "theme_color": "#00040a",
   "icons": [
     {
-      "src": "icon-180.png?v=41",
+      "src": "icon-180.png?v=50",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png?v=41",
+      "src": "icon-512.png?v=50",
       "sizes": "512x512",
       "type": "image/png"
     }

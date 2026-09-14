@@ -1,0 +1,20 @@
+JARVIS DBJ v5 — VERSIONE DEFINITIVA
+
+NOVITÀ
+- Sfondo stellato molto più fitto e visibile su tutta la dashboard.
+- Pannelli più trasparenti.
+- Nebulose e stelle animate leggere.
+- Terra inferiore più realistica e senza barra centrale.
+- Movimento continuo ben visibile della Terra.
+- Stencil bianco.
+- Reattore centrale e anelli animati.
+- Meteo reale, note e collegamenti.
+- Cache vecchie eliminate.
+
+INSTALLAZIONE
+1. GitHub > Jarvis--ipad > Code > + > Upload files.
+2. Carica TUTTI i file di questo pacchetto.
+3. Commit changes.
+4. Aspetta la spunta verde del deployment.
+5. Apri la pagina con ?v=50 la prima volta.
+6. Se ti piace, Safari > Condividi > Aggiungi alla schermata Home.
