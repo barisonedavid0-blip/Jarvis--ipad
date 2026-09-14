@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="JARVIS DBJ">
-<link rel="manifest" href="manifest.json?v=70">
-<link rel="apple-touch-icon" href="icon-180.png?v=70">
+<link rel="manifest" href="manifest.json?v=80">
+<link rel="apple-touch-icon" href="icon-180.png?v=80">
 <title>JARVIS — DBJ INDUSTRY</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700&display=swap');
@@ -32,7 +32,7 @@ html,body{
  position:fixed;inset:0;z-index:0;overflow:hidden;
  background:
  linear-gradient(rgba(0,3,10,.12),rgba(0,3,10,.20)),
- url('space-v62.jpg?v=70') center/cover no-repeat fixed;
+ url('space-v62.jpg?v=80') center/cover no-repeat fixed;
 }
 .space:before{
  content:"";position:absolute;inset:0;pointer-events:none;
@@ -148,7 +148,7 @@ html,body{
 .g div{font-size:9px}.g b{display:block;font-size:11px;color:#5ee5ff}
 .today{grid-column:5;grid-row:2;padding:13px}
 .task{padding:6px 0;border-bottom:1px solid rgba(57,227,255,.15);font-size:10px}
-.world{grid-column:1/3;grid-row:3;padding:11px 12px;background:linear-gradient(rgba(1,9,18,.22),rgba(1,8,15,.44)),url('worldmap.png?v=70') center/cover no-repeat}
+.world{grid-column:1/3;grid-row:3;padding:11px 12px;background:linear-gradient(rgba(1,9,18,.22),rgba(1,8,15,.44)),url('worldmap.png?v=80') center/cover no-repeat}
 .intel{position:absolute;right:10px;top:30px;display:grid;gap:7px;font-size:9px}
 .intel span{padding:3px 6px;background:rgba(1,10,18,.60);border-left:2px solid #47e0ff}
 .appt{grid-column:4;grid-row:3;padding:12px;font-size:9px;line-height:1.7}
@@ -215,6 +215,9 @@ to{opacity:.92}}
 .radio105 strong{font-family:Georgia,serif;font-size:13px}
 .weather .statusline{font:9px Arial;color:#54e4ff;margin-top:5px}
 </style>
+<style>
+.aiModal{position:fixed;inset:0;z-index:1200;background:rgba(0,4,10,.88);display:none;align-items:center;justify-content:center;padding:20px}.aiModal.show{display:flex}.aiCard{width:min(820px,94vw);height:min(690px,88vh);border:1px solid #34e1ff;background:linear-gradient(180deg,rgba(2,18,31,.98),rgba(0,7,14,.99));box-shadow:0 0 50px rgba(44,220,255,.22);display:flex;flex-direction:column}.aiHead{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(53,222,255,.28)}.aiHead strong{color:#e7fbff;letter-spacing:.12em}.aiHead small{color:#55dcf5}.aiClose,.aiCfg{border:1px solid #2ddcff;background:#031521;color:#eaffff;padding:6px 9px}.aiLog{flex:1;overflow:auto;padding:14px}.aiMsg{max-width:82%;padding:9px 11px;margin:8px 0;border:1px solid rgba(50,216,255,.25);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:pre-wrap}.aiMsg.user{margin-left:auto;background:rgba(0,102,132,.25)}.aiMsg.jarvis{background:rgba(2,22,35,.86)}.aiInputRow{display:grid;grid-template-columns:auto 1fr auto;gap:8px;padding:10px;border-top:1px solid rgba(53,222,255,.24)}.aiInputRow input{min-width:0;background:#000812;border:1px solid #267f93;color:#fff;padding:10px}.aiInputRow button{border:1px solid #36defd;background:#041722;color:#fff;padding:8px 12px}.aiSetup{display:none;padding:12px;border-top:1px solid rgba(53,222,255,.2);font:12px/1.4 Arial;color:#c8f7ff}.aiSetup.show{display:block}.aiSetup input{width:100%;box-sizing:border-box;margin-top:7px;background:#000812;border:1px solid #267f93;color:#fff;padding:9px}.aiStatus{padding:0 14px 8px;font:10px Arial;color:#55dcf5}
+</style>
 </head>
 <body>
 <div class="space"></div><div class="twinkle"></div>
@@ -252,7 +255,7 @@ to{opacity:.92}}
   <div class="arc"></div>
   <div class="ct"><strong class="stencil">JARVIS</strong><span>ONLINE</span></div>
  </div>
- <button class="speak stencil" id="talkBtn">🎙 PARLA CON JARVIS<small>Tocca e parla</small></button>
+ <button class="speak stencil" id="talkBtn">🎙 PARLA CON JARVIS<small>Assistente AI</small></button>
 </section>
 
 <section class="panel system">
@@ -298,21 +301,21 @@ Non mollare</textarea>
 </section>
 
 <section class="panel dock">
-<a class="appicon" href="https://chatgpt.com/" target="_self"><img src="app-chatgpt.png?v=70"><span>ChatGPT</span></a>
-<a class="appicon" href="#" id="notesShortcut"><img src="app-note.png?v=70"><span>Note</span></a>
-<a class="appicon" href="https://www.icloud.com/iclouddrive/" target="_blank"><img src="app-file.png?v=70"><span>File</span></a>
-<a class="appicon" href="https://www.icloud.com/photos/" target="_blank"><img src="app-photo.png?v=70"><span>Foto</span></a>
-<a class="appicon" href="#" id="cameraShortcut"><img src="app-camera.png?v=70"><span>Fotocamera</span></a>
-<a class="appicon" href="https://www.google.com/" target="_blank"><img src="app-safari.png?v=70"><span>Safari</span></a>
-<a class="appicon" href="https://www.icloud.com/mail/" target="_blank"><img src="app-mail.png?v=70"><span>Mail</span></a>
-<a class="appicon" href="https://www.youtube.com/" target="_blank"><img src="app-youtube.png?v=70"><span>YouTube</span></a>
-<a class="appicon" href="https://open.spotify.com/" target="_blank"><img src="app-spotify.png?v=70"><span>Spotify</span></a>
-<a class="appicon" href="https://apps.apple.com/" target="_blank"><img src="app-store.png?v=70"><span>App Store</span></a>
-<a class="appicon" href="#" id="settingsShortcut"><img src="app-settings.png?v=70"><span>Impostazioni</span></a>
+<a class="appicon" href="https://chatgpt.com/" target="_self"><img src="app-chatgpt.png?v=80"><span>ChatGPT</span></a>
+<a class="appicon" href="#" id="notesShortcut"><img src="app-note.png?v=80"><span>Note</span></a>
+<a class="appicon" href="https://www.icloud.com/iclouddrive/" target="_blank"><img src="app-file.png?v=80"><span>File</span></a>
+<a class="appicon" href="https://www.icloud.com/photos/" target="_blank"><img src="app-photo.png?v=80"><span>Foto</span></a>
+<a class="appicon" href="#" id="cameraShortcut"><img src="app-camera.png?v=80"><span>Fotocamera</span></a>
+<a class="appicon" href="https://www.google.com/" target="_blank"><img src="app-safari.png?v=80"><span>Safari</span></a>
+<a class="appicon" href="https://www.icloud.com/mail/" target="_blank"><img src="app-mail.png?v=80"><span>Mail</span></a>
+<a class="appicon" href="https://www.youtube.com/" target="_blank"><img src="app-youtube.png?v=80"><span>YouTube</span></a>
+<a class="appicon" href="https://open.spotify.com/" target="_blank"><img src="app-spotify.png?v=80"><span>Spotify</span></a>
+<a class="appicon" href="https://apps.apple.com/" target="_blank"><img src="app-store.png?v=80"><span>App Store</span></a>
+<a class="appicon" href="#" id="settingsShortcut"><img src="app-settings.png?v=80"><span>Impostazioni</span></a>
 </section>
 
 <section class="panel earth">
- <img class="earthPhoto" src="earth-static.jpg?v=70" alt="Terra">
+ <img class="earthPhoto" src="earth-static.jpg?v=80" alt="Terra">
  <div class="earthShade"></div>
 </section>
 </div>
@@ -416,10 +419,7 @@ function jarvisSpeak(msg){
    setTimeout(resolve,2200);
  });
 }
-$('#talkBtn').onclick=async()=>{
- await jarvisSpeak('JARVIS online. Come posso aiutarla, Dave?');
- location.href='https://chatgpt.com/';
-};
+
 
 // iPadOS restrictions: show guidance instead of pretending native apps can always be launched
 $('#cameraShortcut').onclick=e=>{e.preventDefault();toast('Apri Fotocamera dalla Home o dal Centro di Controllo')};
@@ -491,6 +491,10 @@ document.querySelectorAll(".news-tabs button").forEach(b=>b.addEventListener("cl
 }));
 setTimeout(()=>loadNews("general"),700);
 setInterval(()=>loadNews(document.querySelector(".news-tabs button.active")?.dataset.feed||"general"),10*60*1000);
+</script>
+<div class="aiModal" id="aiModal"><div class="aiCard"><div class="aiHead"><div><strong class="stencil">JARVIS // AI CORE</strong><br><small>DBJ INDUSTRY • SECURE LINK</small></div><div><button class="aiCfg" id="aiCfg">⚙</button> <button class="aiClose" id="aiClose">✕</button></div></div><div class="aiLog" id="aiLog"><div class="aiMsg jarvis">JARVIS online. Come posso aiutarla, Dave?</div></div><div class="aiStatus" id="aiStatus">Endpoint AI non configurato</div><div class="aiSetup" id="aiSetup"><b>COLLEGAMENTO SICURO</b><br>Incolla l'indirizzo del backend Vercel:<input id="aiEndpoint" placeholder="https://...vercel.app/api/jarvis"><button id="aiSave" class="aiCfg" style="margin-top:8px">SALVA ENDPOINT</button></div><div class="aiInputRow"><button id="aiMic">🎙</button><input id="aiInput" autocomplete="off" placeholder="Scrivi a JARVIS…"><button id="aiSend">INVIA</button></div></div></div>
+<script>
+(()=>{const modal=document.getElementById('aiModal'),log=document.getElementById('aiLog'),input=document.getElementById('aiInput'),status=document.getElementById('aiStatus'),setup=document.getElementById('aiSetup'),epInput=document.getElementById('aiEndpoint');const getEndpoint=()=>localStorage.getItem('jarvis_api_endpoint')||'';const setStatus=()=>status.textContent=getEndpoint()?'AI CORE collegato':'Endpoint AI non configurato';function say(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='it-IT';u.rate=.94;u.pitch=.82;speechSynthesis.speak(u)}function addMsg(t,w){const d=document.createElement('div');d.className='aiMsg '+w;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight}async function send(){const text=input.value.trim();if(!text)return;const endpoint=getEndpoint();addMsg(text,'user');input.value='';if(!endpoint){addMsg('Il collegamento AI non è ancora configurato. Tocca ⚙ e inserisci l’endpoint del backend sicuro.','jarvis');setup.classList.add('show');return}status.textContent='JARVIS sta elaborando…';try{const history=[...log.querySelectorAll('.aiMsg')].slice(-10).map(x=>({role:x.classList.contains('user')?'user':'assistant',content:x.textContent}));const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,history})});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||('HTTP '+r.status));const answer=data.answer||'Nessuna risposta ricevuta.';addMsg(answer,'jarvis');say(answer);status.textContent='AI CORE collegato'}catch(e){addMsg('Collegamento AI non disponibile: '+e.message,'jarvis');status.textContent='Errore collegamento'}}document.getElementById('talkBtn').onclick=()=>{modal.classList.add('show');setStatus();setTimeout(()=>input.focus(),120)};document.getElementById('aiClose').onclick=()=>modal.classList.remove('show');document.getElementById('aiCfg').onclick=()=>{setup.classList.toggle('show');epInput.value=getEndpoint()};document.getElementById('aiSave').onclick=()=>{const v=epInput.value.trim().replace(/\/$/,'');if(v){localStorage.setItem('jarvis_api_endpoint',v);setup.classList.remove('show');setStatus()}};document.getElementById('aiSend').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter')send()});document.getElementById('aiMic').onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){addMsg('Dettatura vocale non disponibile qui. Usa la dettatura della tastiera iPad.','jarvis');return}const r=new SR();r.lang='it-IT';r.interimResults=false;r.maxAlternatives=1;status.textContent='Ascolto…';r.onresult=e=>{input.value=e.results[0][0].transcript;send()};r.onerror=()=>status.textContent='Microfono non disponibile';r.onend=()=>{if(status.textContent==='Ascolto…')setStatus()};r.start()};setStatus()})();
 </script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+{
+  "name": "jarvis-dbj-v8",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

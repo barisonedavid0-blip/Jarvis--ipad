@@ -1,0 +1,12 @@
+JARVIS DBJ V8 — AI INTEGRATA
+
+La chiave OpenAI NON va mai messa dentro index.html o GitHub Pages.
+
+1) Carica la V8 nel repository GitHub come prima.
+2) Su Vercel importa lo stesso repository.
+3) Environment Variables: crea OPENAI_API_KEY e inserisci la tua chiave API OpenAI.
+4) Deploy.
+5) Copia l’URL Vercel e aggiungi /api/jarvis.
+6) In JARVIS > PARLA CON JARVIS > ⚙ incolla quell’indirizzo e salva.
+
+ChatGPT Plus e API OpenAI sono separati: l’API richiede fatturazione/credito API.
